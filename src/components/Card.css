@@ -1,0 +1,76 @@
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.cardContainer {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  width: 800px;
+  border: 2px solid grey;
+  background-color: white;
+  border-radius: 20px;
+  color: black;
+  margin: 10px 25px;
+  cursor: pointer;
+}
+
+.arrow {
+  display: flex;
+}
+
+.leftArrowKey {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 1.5em;
+  width: 1.5em;
+  font-size: 2em;
+  background-color: rgba(75, 75, 75, 0.632);
+  border-radius: 45px;
+  margin-right: 10px;
+}
+
+.leftArrowKey:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.rightArrowKey {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 1.5em;
+  width: 1.5em;
+  font-size: 2em;
+  background-color: rgba(75, 75, 75, 0.632);
+  border-radius: 45px;
+  margin-left: 10px;
+}
+
+.rightArrowKey:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+h2 {
+  margin: 15px;
+}
+
+@media screen and (max-width: 880px) {
+  .cardContainer {
+    width: 500px;
+  }
+
+  @media screen and (max-width: 600px) {
+    .cardContainer {
+      width: 400px;
+    }
+  }
+}
