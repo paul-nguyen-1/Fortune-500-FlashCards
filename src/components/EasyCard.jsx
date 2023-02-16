@@ -22,7 +22,7 @@ function EasyCard({ companiesEasy }) {
   //shuffle card on click and flips face card to front
   const shuffleIndex = () => {
     setIndex(Math.floor(Math.random() * 10));
-    active || (!active && setFlipCard(true));
+    active ? setFlipCard(true) : setFlipCard(true);
     setCorrectAnswer(true);
     setActive(false);
     setIncorrectAnswer(true);
@@ -31,7 +31,7 @@ function EasyCard({ companiesEasy }) {
   //Activates slider to go up to the next index and flip face card to front
   const handleRightArrowKey = () => {
     index > 8 ? setIndex(0) : setIndex(index + 1);
-    active || (!active && setFlipCard(true));
+    active ? setFlipCard(true) : setFlipCard(true);
     setCorrectAnswer(true);
     setActive(false);
     setIncorrectAnswer(true);
@@ -40,7 +40,7 @@ function EasyCard({ companiesEasy }) {
   //Activates the slider to go to the previous index and flip face card to front
   const handleLeftArrowKey = () => {
     index < 1 ? setIndex(9) : setIndex(index - 1);
-    active || (!active && setFlipCard(true));
+    active ? setFlipCard(true) : setFlipCard(true);
     setCorrectAnswer(true);
     setActive(false);
     setIncorrectAnswer(true);
@@ -56,78 +56,84 @@ function EasyCard({ companiesEasy }) {
   //remember to refactor this lol
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (answer.toLowerCase() === companiesEasy[index].answer.toLowerCase()) {
+    if (active && initializeStart === true) {
+      setFlipCard(true);
+      setActive(false);
+    } else if (
+      answer.toLowerCase() === companiesEasy[index].answer.toLowerCase()
+    ) {
       setCorrectAnswer(true);
       setActive(true);
       setIncorrectAnswer(true);
       setFlipCard(true);
-      setInitializeStart(true);
     } else {
-      setInitializeStart(true);
       setFlipCard(true);
       setActive(false);
       setCorrectAnswer(false);
       setIncorrectAnswer(false);
     }
+    setInitializeStart(true);
     e.target.reset();
     setAnswer("");
   };
 
   return (
-    <div className="card">
-      <div
-        className="cardContainer"
-        onClick={handleSetActive}
-        style={{ border: "5px solid #39FF14" }}
-      >
-        {active && correctAnswer ? (
-          <h1>Correct!</h1>
-        ) : (
-          active &&
-          initializeStart && (
-            <h2>Easy Mode: Click here to test your knowledge!</h2>
-          )
-        )}
-        {!active && (
-          <ReactCardFlip isFlipped={flipCard} flipDirection="vertical">
-            <div>
-              <h1 style={{ display: flipCard && "none" }}>
-                {companiesEasy[index].answer}
-              </h1>
-            </div>
+    <>
+      <div className="card">
+        <div
+          className="cardContainer"
+          onClick={handleSetActive}
+          style={{ border: "5px solid #39FF14" }}
+        >
+          {active && correctAnswer ? (
+            <h1>Correct!</h1>
+          ) : (
+            active &&
+            initializeStart && (
+              <h2>Easy Mode: Click here to test your knowledge!</h2>
+            )
+          )}
+          {!active && (
+            <ReactCardFlip isFlipped={flipCard} flipDirection="vertical">
+              <div>
+                <h1 style={{ display: flipCard && "none" }}>
+                  {companiesEasy[index].answer}
+                </h1>
+              </div>
 
-            <div>
-              <h2 style={{ display: !flipCard && "none" }}>
-                {companiesEasy[index].question}
-              </h2>
-            </div>
-          </ReactCardFlip>
-        )}
-      </div>
-      <div className="inputForm">
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="Place a Guess Here:"
-            onChange={handleAnswer}
-            className={incorrectAnswer ? "" : "invalid"}
-          ></input>
-          <input
-            type="submit"
-            className={incorrectAnswer ? "" : "invalid"}
-          ></input>
-        </form>
-      </div>
-      <div className="arrow">
-        <div onClick={handleLeftArrowKey} className="leftArrowKey">
-          ←
+              <div>
+                <h2 style={{ display: !flipCard && "none" }}>
+                  {companiesEasy[index].question}
+                </h2>
+              </div>
+            </ReactCardFlip>
+          )}
         </div>
-        <button onClick={shuffleIndex}>Shuffle</button>
-        <div onClick={handleRightArrowKey} className="rightArrowKey">
-          →
+        <div className="inputForm">
+          <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              placeholder="Place a Guess Here:"
+              onChange={handleAnswer}
+              className={incorrectAnswer ? "" : "invalid"}
+            ></input>
+            <input
+              type="submit"
+              className={incorrectAnswer ? "" : "invalid"}
+            ></input>
+          </form>
+        </div>
+        <div className="arrow">
+          <div onClick={handleLeftArrowKey} className="leftArrowKey">
+            ←
+          </div>
+          <button onClick={shuffleIndex}>Shuffle</button>
+          <div onClick={handleRightArrowKey} className="rightArrowKey">
+            →
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
