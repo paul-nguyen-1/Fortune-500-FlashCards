@@ -13,12 +13,14 @@ function EasyCard({ companiesEasy }) {
   //Function to flip card and exit intro card
   const handleSetActive = () => {
     setActive(false);
-    !active ? setFlipCard(!flipCard) : setFlipCard(flipCard);
+    active && setFlipCard(true);
+    !active && setFlipCard(!flipCard);
   };
 
   //shuffle card on click
   const shuffleIndex = () => {
     setIndex(Math.floor(Math.random() * 10));
+    active && setFlipCard(true);
     !active && setFlipCard(true);
     setCorrectAnswer(false);
     setActive(false);
@@ -27,6 +29,7 @@ function EasyCard({ companiesEasy }) {
   //Activates slider to go up to the next index
   const handleRightArrowKey = () => {
     index > 8 ? setIndex(0) : setIndex(index + 1);
+    active && setFlipCard(true);
     !active && setFlipCard(true);
     setCorrectAnswer(false);
     setActive(false);
@@ -35,6 +38,7 @@ function EasyCard({ companiesEasy }) {
   //Activates the slider to go to the previous index
   const handleLeftArrowKey = () => {
     index < 1 ? setIndex(9) : setIndex(index - 1);
+    active && setFlipCard(true);
     !active && setFlipCard(true);
     setCorrectAnswer(false);
     setActive(false);
