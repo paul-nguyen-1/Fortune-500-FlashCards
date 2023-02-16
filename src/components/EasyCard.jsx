@@ -3,6 +3,7 @@ import ReactCardFlip from "react-card-flip";
 import "./Card.css";
 
 function EasyCard({ companiesEasy }) {
+  const [answer, setAnswer] = useState("");
   const [active, setActive] = useState(true);
   const [flipCard, setFlipCard] = useState(false);
   const [index, setIndex] = useState(0);
@@ -15,7 +16,8 @@ function EasyCard({ companiesEasy }) {
 
   const shuffleIndex = () => {
     setIndex(Math.floor(Math.random() * 10));
-    console.log(index)
+    console.log(index);
+    !active && setFlipCard(true);
   };
 
   //Activates slider to go up to the next index
@@ -30,6 +32,16 @@ function EasyCard({ companiesEasy }) {
     !active && setFlipCard(true);
   };
 
+  //check answer on submit
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (
+      e.target.value().lowerCase() === companiesEasy[index].answer.lowerCase()
+    ) {
+      console.log(working);
+    }
+  };
+
   return (
     <div className="card">
       <div
@@ -39,10 +51,7 @@ function EasyCard({ companiesEasy }) {
       >
         {active && <h2>Easy Mode: Click here to test your knowledge!</h2>}
         {!active && (
-          <ReactCardFlip
-            isFlipped={flipCard}
-            flipDirection="vertical"
-          >
+          <ReactCardFlip isFlipped={flipCard} flipDirection="vertical">
             <div>
               <h1 style={{ display: flipCard && "none" }}>
                 {companiesEasy[index].answer}
@@ -50,14 +59,18 @@ function EasyCard({ companiesEasy }) {
             </div>
 
             <div>
-              <h2
-                style={{ display: !flipCard && "none" }}
-              >
+              <h2 style={{ display: !flipCard && "none" }}>
                 {companiesEasy[index].question}
               </h2>
             </div>
           </ReactCardFlip>
         )}
+      </div>
+      <div className="inputForm">
+        <form onSubmit={handleSubmit}>
+          <input type="text"></input>
+          <input type="submit"></input>
+        </form>
       </div>
       <div className="arrow">
         <div onClick={handleLeftArrowKey} className="leftArrowKey">

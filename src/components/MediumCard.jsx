@@ -16,6 +16,7 @@ function MediumCard({ companiesMedium }) {
   const shuffleIndex = () => {
     setIndex(Math.floor(Math.random() * 10));
     console.log(index);
+    !active && setFlipCard(true);
   };
 
   //Activates slider to go up to the next index
