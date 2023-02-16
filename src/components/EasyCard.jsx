@@ -59,11 +59,13 @@ function EasyCard({ companiesEasy }) {
       setActive(true);
       setInitializeStart(true);
       setIncorrectAnswer(true);
+      setFlipCard(true);
     } else {
       setActive(false);
       setCorrectAnswer(false);
       setInitializeStart(true);
       setIncorrectAnswer(false);
+      setFlipCard(true);
     }
   };
 
