@@ -19,9 +19,9 @@ function EasyCard({ companiesEasy }) {
   //shuffle card on click
   const shuffleIndex = () => {
     setIndex(Math.floor(Math.random() * 10));
-    console.log(index);
     !active && setFlipCard(true);
     setCorrectAnswer(false);
+    setActive(false);
   };
 
   //Activates slider to go up to the next index
