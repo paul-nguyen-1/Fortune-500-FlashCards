@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import ReactCardFlip from "react-card-flip";
 import "./Card.css";
@@ -36,9 +35,9 @@ function HardCard({ companiesHard }) {
       <div
         className="cardContainer"
         onClick={handleSetActive}
-        style={{ border: "5px solid #39FF14" }}
+        style={{ border: "5px solid red" }}
       >
-        {active && <h2>Easy Mode: Click here to test your knowledge!</h2>}
+        {active && <h2>Hard Mode: Click here to test your knowledge!</h2>}
         {!active && (
           <ReactCardFlip isFlipped={flipCard} flipDirection="vertical">
             <div>

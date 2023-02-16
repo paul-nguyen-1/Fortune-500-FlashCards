@@ -37,7 +37,7 @@ function MediumCard({ companiesMedium }) {
         onClick={handleSetActive}
         style={{ border: "5px solid #FFFF00" }}
       >
-        {active && <h2>Easy Mode: Click here to test your knowledge!</h2>}
+        {active && <h2>Medium Mode: Click here to test your knowledge!</h2>}
         {!active && (
           <ReactCardFlip isFlipped={flipCard} flipDirection="vertical">
             <div>
