@@ -53,21 +53,24 @@ function EasyCard({ companiesEasy }) {
   };
 
   //Check answer on submit toggle whether or not initializing cards are active depending on answer
+  //remember to refactor this lol
   const handleSubmit = (e) => {
     e.preventDefault();
     if (answer.toLowerCase() === companiesEasy[index].answer.toLowerCase()) {
       setCorrectAnswer(true);
       setActive(true);
-      setInitializeStart(true);
       setIncorrectAnswer(true);
       setFlipCard(true);
+      setInitializeStart(true);
     } else {
+      setInitializeStart(true);
+      setFlipCard(true);
       setActive(false);
       setCorrectAnswer(false);
-      setInitializeStart(true);
       setIncorrectAnswer(false);
-      setFlipCard(true);
     }
+    e.target.reset();
+    setAnswer("");
   };
 
   return (
@@ -78,7 +81,7 @@ function EasyCard({ companiesEasy }) {
         style={{ border: "5px solid #39FF14" }}
       >
         {active && correctAnswer ? (
-          <h2>Correct!</h2>
+          <h1>Correct!</h1>
         ) : (
           active &&
           initializeStart && (
