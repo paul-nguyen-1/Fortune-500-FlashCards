@@ -13,6 +13,11 @@ function EasyCard({ companiesEasy }) {
     setFlipCard(!flipCard);
   };
 
+  const shuffleIndex = () => {
+    setIndex(Math.floor(Math.random() * 10));
+    console.log(index)
+  };
+
   //Activates slider to go up to the next index
   const handleRightArrowKey = () => {
     index > 8 ? setIndex(0) : setIndex(index + 1);
@@ -37,7 +42,6 @@ function EasyCard({ companiesEasy }) {
           <ReactCardFlip
             isFlipped={flipCard}
             flipDirection="vertical"
-            flipSpeedBackToFront="0.4"
           >
             <div>
               <h1 style={{ display: flipCard && "none" }}>
@@ -47,7 +51,6 @@ function EasyCard({ companiesEasy }) {
 
             <div>
               <h2
-                flipSpeedFrontToBack="0.4"
                 style={{ display: !flipCard && "none" }}
               >
                 {companiesEasy[index].question}
@@ -60,6 +63,7 @@ function EasyCard({ companiesEasy }) {
         <div onClick={handleLeftArrowKey} className="leftArrowKey">
           ←
         </div>
+        <button onClick={shuffleIndex}>Shuffle</button>
         <div onClick={handleRightArrowKey} className="rightArrowKey">
           →
         </div>

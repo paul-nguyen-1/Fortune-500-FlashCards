@@ -23,6 +23,8 @@
 
 .arrow {
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .leftArrowKey {
@@ -57,6 +59,10 @@
 .rightArrowKey:hover {
   cursor: pointer;
   opacity: 0.8;
+}
+
+button{
+  width: 125px;
 }
 
 h2 {
