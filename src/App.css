@@ -46,14 +46,9 @@ button {
   margin: 10px;
 }
 
-input#invalid {
+input.invalid {
   animation: shake 300ms;
   color: red;
-}
-
-input.valid {
-  animation: shake 300ms;
-  color: rgb(65, 255, 65);
 }
 
 @keyframes shake {

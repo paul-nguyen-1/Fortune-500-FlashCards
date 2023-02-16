@@ -9,39 +9,41 @@ function EasyCard({ companiesEasy }) {
   const [flipCard, setFlipCard] = useState(false);
   const [index, setIndex] = useState(0);
   const [correctAnswer, setCorrectAnswer] = useState(false);
+  const [incorrectAnswer, setIncorrectAnswer] = useState(true);
 
   //Function to flip card and exit intro card
   const handleSetActive = () => {
     setActive(false);
     active && setFlipCard(true);
     !active && setFlipCard(!flipCard);
+    setIncorrectAnswer(true);
   };
 
-  //shuffle card on click
+  //shuffle card on click and flips face card to front
   const shuffleIndex = () => {
     setIndex(Math.floor(Math.random() * 10));
-    active && setFlipCard(true);
-    !active && setFlipCard(true);
-    setCorrectAnswer(false);
+    active || (!active && setFlipCard(true));
+    setCorrectAnswer(true);
     setActive(false);
+    setIncorrectAnswer(true);
   };
 
-  //Activates slider to go up to the next index
+  //Activates slider to go up to the next index and flip face card to front
   const handleRightArrowKey = () => {
     index > 8 ? setIndex(0) : setIndex(index + 1);
-    active && setFlipCard(true);
-    !active && setFlipCard(true);
-    setCorrectAnswer(false);
+    active || (!active && setFlipCard(true));
+    setCorrectAnswer(true);
     setActive(false);
+    setIncorrectAnswer(true);
   };
 
-  //Activates the slider to go to the previous index
+  //Activates the slider to go to the previous index and flip face card to front
   const handleLeftArrowKey = () => {
     index < 1 ? setIndex(9) : setIndex(index - 1);
-    active && setFlipCard(true);
-    !active && setFlipCard(true);
-    setCorrectAnswer(false);
+    active || (!active && setFlipCard(true));
+    setCorrectAnswer(true);
     setActive(false);
+    setIncorrectAnswer(true);
   };
 
   //Store value of answer
@@ -49,16 +51,19 @@ function EasyCard({ companiesEasy }) {
     setAnswer(e.target.value);
   };
 
-  //Check answer on submit
+  //Check answer on submit toggle whether or not initializing cards are active depending on answer
   const handleSubmit = (e) => {
     e.preventDefault();
     if (answer.toLowerCase() === companiesEasy[index].answer.toLowerCase()) {
       setCorrectAnswer(true);
       setActive(true);
       setInitializeStart(true);
+      setIncorrectAnswer(true);
     } else {
+      setActive(false);
       setCorrectAnswer(false);
       setInitializeStart(true);
+      setIncorrectAnswer(false);
     }
   };
 
@@ -99,11 +104,11 @@ function EasyCard({ companiesEasy }) {
             type="text"
             placeholder="Place a Guess Here:"
             onChange={handleAnswer}
-            className={correctAnswer ? "valid" : "invalid"}
+            className={incorrectAnswer ? "" : "invalid"}
           ></input>
           <input
             type="submit"
-            className={correctAnswer ? "valid" : "invalid"}
+            className={incorrectAnswer ? "" : "invalid"}
           ></input>
         </form>
       </div>
