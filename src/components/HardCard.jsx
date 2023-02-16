@@ -20,15 +20,20 @@ function HardCard({ companiesHard }) {
   };
 
   //shuffle card on click and flips face card to front
+  //shuffle entire arr of obj companiesHard
   const shuffleIndex = () => {
-    setIndex(Math.floor(Math.random() * 10));
+    companiesHard.sort(() => Math.random() - 0.5);
+    !active && setIndex(Math.floor(Math.random() * 10));
     active ? setFlipCard(true) : setFlipCard(true);
     setCorrectAnswer(true);
     setActive(false);
     setIncorrectAnswer(true);
+    //Check if order of array if shuffling -- currently works and shuffles array with correct index
+    // console.log(companiesHard);
   };
 
   //Activates slider to go up to the next index and flip face card to front
+  //restart if it goes past the last index
   const handleRightArrowKey = () => {
     index > 8 ? setIndex(0) : setIndex(index + 1);
     active ? setFlipCard(true) : setFlipCard(true);
@@ -38,6 +43,7 @@ function HardCard({ companiesHard }) {
   };
 
   //Activates the slider to go to the previous index and flip face card to front
+  //restart if it goes past the initial index
   const handleLeftArrowKey = () => {
     index < 1 ? setIndex(9) : setIndex(index - 1);
     active ? setFlipCard(true) : setFlipCard(true);
@@ -83,7 +89,10 @@ function HardCard({ companiesHard }) {
         <div
           className="cardContainer"
           onClick={handleSetActive}
-          style={{ border: "5px solid red" }}
+          style={{
+            border: "5px solid red",
+            boxShadow: "red 2px 2px 2px",
+          }}
         >
           {active && correctAnswer ? (
             <h1>Correct!</h1>
