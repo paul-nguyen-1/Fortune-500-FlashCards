@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ReactCardFlip from "react-card-flip";
 import "./Card.css";
 
-function EasyCard({ companiesMedium }) {
+function MediumCard({ companiesMedium }) {
   const [active, setActive] = useState(true);
   const [flipCard, setFlipCard] = useState(false);
   const [index, setIndex] = useState(0);
@@ -11,6 +11,11 @@ function EasyCard({ companiesMedium }) {
   const handleSetActive = () => {
     setActive(false);
     setFlipCard(!flipCard);
+  };
+
+  const shuffleIndex = () => {
+    setIndex(Math.floor(Math.random() * 10));
+    console.log(index);
   };
 
   //Activates slider to go up to the next index
@@ -32,13 +37,9 @@ function EasyCard({ companiesMedium }) {
         onClick={handleSetActive}
         style={{ border: "5px solid #FFFF00" }}
       >
-        {active && <h2>Medium Mode: Click here to test your knowledge!</h2>}
+        {active && <h2>Easy Mode: Click here to test your knowledge!</h2>}
         {!active && (
-          <ReactCardFlip
-            isFlipped={flipCard}
-            flipDirection="vertical"
-            flipSpeedBackToFront="0.4"
-          >
+          <ReactCardFlip isFlipped={flipCard} flipDirection="vertical">
             <div>
               <h1 style={{ display: flipCard && "none" }}>
                 {companiesMedium[index].answer}
@@ -46,10 +47,7 @@ function EasyCard({ companiesMedium }) {
             </div>
 
             <div>
-              <h2
-                flipSpeedFrontToBack="0.4"
-                style={{ display: !flipCard && "none" }}
-              >
+              <h2 style={{ display: !flipCard && "none" }}>
                 {companiesMedium[index].question}
               </h2>
             </div>
@@ -60,6 +58,7 @@ function EasyCard({ companiesMedium }) {
         <div onClick={handleLeftArrowKey} className="leftArrowKey">
           ←
         </div>
+        <button onClick={shuffleIndex}>Shuffle</button>
         <div onClick={handleRightArrowKey} className="rightArrowKey">
           →
         </div>
@@ -68,4 +67,4 @@ function EasyCard({ companiesMedium }) {
   );
 }
 
-export default EasyCard;
+export default MediumCard;

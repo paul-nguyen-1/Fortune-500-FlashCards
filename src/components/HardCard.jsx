@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import ReactCardFlip from "react-card-flip";
 import "./Card.css";
@@ -11,6 +12,11 @@ function HardCard({ companiesHard }) {
   const handleSetActive = () => {
     setActive(false);
     setFlipCard(!flipCard);
+  };
+
+  const shuffleIndex = () => {
+    setIndex(Math.floor(Math.random() * 10));
+    console.log(index);
   };
 
   //Activates slider to go up to the next index
@@ -30,15 +36,11 @@ function HardCard({ companiesHard }) {
       <div
         className="cardContainer"
         onClick={handleSetActive}
-        style={{ border: "5px solid red" }}
+        style={{ border: "5px solid #39FF14" }}
       >
-        {active && <h2>Hard Mode: Click here to test your knowledge!</h2>}
+        {active && <h2>Easy Mode: Click here to test your knowledge!</h2>}
         {!active && (
-          <ReactCardFlip
-            isFlipped={flipCard}
-            flipDirection="vertical"
-            flipSpeedBackToFront="0.4"
-          >
+          <ReactCardFlip isFlipped={flipCard} flipDirection="vertical">
             <div>
               <h1 style={{ display: flipCard && "none" }}>
                 {companiesHard[index].answer}
@@ -46,10 +48,7 @@ function HardCard({ companiesHard }) {
             </div>
 
             <div>
-              <h2
-                flipSpeedFrontToBack="0.4"
-                style={{ display: !flipCard && "none" }}
-              >
+              <h2 style={{ display: !flipCard && "none" }}>
                 {companiesHard[index].question}
               </h2>
             </div>
@@ -60,6 +59,7 @@ function HardCard({ companiesHard }) {
         <div onClick={handleLeftArrowKey} className="leftArrowKey">
           ←
         </div>
+        <button onClick={shuffleIndex}>Shuffle</button>
         <div onClick={handleRightArrowKey} className="rightArrowKey">
           →
         </div>
