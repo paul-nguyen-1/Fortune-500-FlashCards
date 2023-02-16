@@ -18,6 +18,11 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+input {
+  margin: 5px;
+  color: white;
+}
+
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
@@ -37,6 +42,28 @@
   color: #888;
 }
 
-button{
+button {
   margin: 10px;
+}
+
+input#invalid {
+  animation: shake 300ms;
+  color: red;
+}
+
+input.valid {
+  animation: shake 300ms;
+  color: rgb(65, 255, 65);
+}
+
+@keyframes shake {
+  25% {
+    transform: translate(4px);
+  }
+  50% {
+    transform: translate(-4px);
+  }
+  75% {
+    transform: translate(4px);
+  }
 }

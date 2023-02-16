@@ -3,42 +3,58 @@ import ReactCardFlip from "react-card-flip";
 import "./Card.css";
 
 function EasyCard({ companiesEasy }) {
+  const [initializeStart, setInitializeStart] = useState(true);
   const [answer, setAnswer] = useState("");
   const [active, setActive] = useState(true);
   const [flipCard, setFlipCard] = useState(false);
   const [index, setIndex] = useState(0);
+  const [correctAnswer, setCorrectAnswer] = useState(false);
 
   //Function to flip card and exit intro card
   const handleSetActive = () => {
     setActive(false);
-    setFlipCard(!flipCard);
+    !active ? setFlipCard(!flipCard) : setFlipCard(flipCard);
   };
 
+  //shuffle card on click
   const shuffleIndex = () => {
     setIndex(Math.floor(Math.random() * 10));
     console.log(index);
     !active && setFlipCard(true);
+    setCorrectAnswer(false);
   };
 
   //Activates slider to go up to the next index
   const handleRightArrowKey = () => {
     index > 8 ? setIndex(0) : setIndex(index + 1);
     !active && setFlipCard(true);
+    setCorrectAnswer(false);
+    setActive(false);
   };
 
   //Activates the slider to go to the previous index
   const handleLeftArrowKey = () => {
     index < 1 ? setIndex(9) : setIndex(index - 1);
     !active && setFlipCard(true);
+    setCorrectAnswer(false);
+    setActive(false);
   };
 
-  //check answer on submit
+  //Store value of answer
+  const handleAnswer = (e) => {
+    setAnswer(e.target.value);
+  };
+
+  //Check answer on submit
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (
-      e.target.value().lowerCase() === companiesEasy[index].answer.lowerCase()
-    ) {
-      console.log(working);
+    if (answer.toLowerCase() === companiesEasy[index].answer.toLowerCase()) {
+      setCorrectAnswer(true);
+      setActive(true);
+      setInitializeStart(true);
+    } else {
+      setCorrectAnswer(false);
+      setInitializeStart(true);
     }
   };
 
@@ -49,7 +65,14 @@ function EasyCard({ companiesEasy }) {
         onClick={handleSetActive}
         style={{ border: "5px solid #39FF14" }}
       >
-        {active && <h2>Easy Mode: Click here to test your knowledge!</h2>}
+        {active && correctAnswer ? (
+          <h2>Correct!</h2>
+        ) : (
+          active &&
+          initializeStart && (
+            <h2>Easy Mode: Click here to test your knowledge!</h2>
+          )
+        )}
         {!active && (
           <ReactCardFlip isFlipped={flipCard} flipDirection="vertical">
             <div>
@@ -68,8 +91,16 @@ function EasyCard({ companiesEasy }) {
       </div>
       <div className="inputForm">
         <form onSubmit={handleSubmit}>
-          <input type="text"></input>
-          <input type="submit"></input>
+          <input
+            type="text"
+            placeholder="Place a Guess Here:"
+            onChange={handleAnswer}
+            className={correctAnswer ? "valid" : "invalid"}
+          ></input>
+          <input
+            type="submit"
+            className={correctAnswer ? "valid" : "invalid"}
+          ></input>
         </form>
       </div>
       <div className="arrow">
