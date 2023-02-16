@@ -49,6 +49,7 @@ function EasyCard({ companiesEasy }) {
   //Store value of answer
   const handleAnswer = (e) => {
     setAnswer(e.target.value);
+    setIncorrectAnswer(true);
   };
 
   //Check answer on submit toggle whether or not initializing cards are active depending on answer
