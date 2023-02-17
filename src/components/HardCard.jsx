@@ -23,13 +23,13 @@ function HardCard({ companiesHard }) {
   //shuffle entire arr of obj companiesHard
   const shuffleIndex = () => {
     companiesHard.sort(() => Math.random() - 0.5);
-    !active && setIndex(Math.floor(Math.random() * 10));
+    !active && setIndex(0);
     active ? setFlipCard(true) : setFlipCard(true);
     setCorrectAnswer(true);
     setActive(false);
     setIncorrectAnswer(true);
     //Check if order of array if shuffling -- currently works and shuffles array with correct index
-    // console.log(companiesHard);
+    console.log(companiesHard);
   };
 
   //Activates slider to go up to the next index and flip face card to front

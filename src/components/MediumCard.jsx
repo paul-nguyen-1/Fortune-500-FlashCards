@@ -23,13 +23,13 @@ function MediumCard({ companiesMedium }) {
   //shuffle entire arr of obj companiesMedium
   const shuffleIndex = () => {
     companiesMedium.sort(() => Math.random() - 0.5);
-    !active && setIndex(Math.floor(Math.random() * 10));
+    !active && setIndex(0);
     active ? setFlipCard(true) : setFlipCard(true);
     setCorrectAnswer(true);
     setActive(false);
     setIncorrectAnswer(true);
     //Check if order of array if shuffling -- currently works and shuffles array with correct index
-    // console.log(companiesMedium);
+    console.log(companiesMedium);
   };
 
   //Activates slider to go up to the next index and flip face card to front
@@ -45,6 +45,7 @@ function MediumCard({ companiesMedium }) {
   //Activates the slider to go to the previous index and flip face card to front
   //restart if it goes past the initial index
   const handleLeftArrowKey = () => {
+    setIndex(index)
     index < 1 ? setIndex(9) : setIndex(index - 1);
     active ? setFlipCard(true) : setFlipCard(true);
     setCorrectAnswer(true);
