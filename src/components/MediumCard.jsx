@@ -8,8 +8,13 @@ function MediumCard({ companiesMedium }) {
   const [active, setActive] = useState(true);
   const [flipCard, setFlipCard] = useState(false);
   const [index, setIndex] = useState(0);
+  //need correct answer for correct answer card and incorrect for submit css
   const [correctAnswer, setCorrectAnswer] = useState(false);
   const [incorrectAnswer, setIncorrectAnswer] = useState(true);
+
+  //invalid arrow key at beginning and end of index
+  const [invalidArrowLeft, setInvalidArrowLeft] = useState(true);
+  const [invalidArrowRight, setInvalidArrowRight] = useState(false);
 
   //Function to flip card and exit intro card
   const handleSetActive = () => {
@@ -23,11 +28,14 @@ function MediumCard({ companiesMedium }) {
   //shuffle entire arr of obj companiesMedium
   const shuffleIndex = () => {
     companiesMedium.sort(() => Math.random() - 0.5);
-    !active && setIndex(0);
     active ? setFlipCard(true) : setFlipCard(true);
+    !active && setIndex(0);
     setCorrectAnswer(true);
     setActive(false);
     setIncorrectAnswer(true);
+    setInvalidArrowLeft(true);
+    setInvalidArrowRight(false);
+    console.log(index);
     //Check if order of array if shuffling -- currently works and shuffles array with correct index
     console.log(companiesMedium);
   };
@@ -35,7 +43,8 @@ function MediumCard({ companiesMedium }) {
   //Activates slider to go up to the next index and flip face card to front
   //restart if it goes past the last index
   const handleRightArrowKey = () => {
-    index > 8 ? setIndex(0) : setIndex(index + 1);
+    index > 8 ? setIndex(companiesMedium.length - 1) : setIndex(index + 1);
+    index > 7 ? setInvalidArrowRight(true) : setInvalidArrowLeft(false);
     active ? setFlipCard(true) : setFlipCard(true);
     setCorrectAnswer(true);
     setActive(false);
@@ -45,8 +54,8 @@ function MediumCard({ companiesMedium }) {
   //Activates the slider to go to the previous index and flip face card to front
   //restart if it goes past the initial index
   const handleLeftArrowKey = () => {
-    setIndex(index)
-    index < 1 ? setIndex(9) : setIndex(index - 1);
+    index < 1 ? setIndex(0) : setIndex(index - 1);
+    index < 2 ? setInvalidArrowLeft(true) : setInvalidArrowRight(false);
     active ? setFlipCard(true) : setFlipCard(true);
     setCorrectAnswer(true);
     setActive(false);
@@ -91,17 +100,14 @@ function MediumCard({ companiesMedium }) {
           className="cardContainer"
           onClick={handleSetActive}
           style={{
-            border: "5px solid #FFFF00",
-            boxShadow: "#FFFF00 2px 2px 2px",
+            border: "5px solid yellow",
+            boxShadow: "yellow 2px 2px 2px",
           }}
         >
           {active && correctAnswer ? (
             <h1>Correct!</h1>
           ) : (
-            active &&
-            initializeStart && (
-              <h2>Medium Mode: Click here to test your knowledge!</h2>
-            )
+            active && initializeStart && <h2>Warming up...</h2>
           )}
           {!active && (
             <ReactCardFlip isFlipped={flipCard} flipDirection="vertical">
@@ -134,11 +140,19 @@ function MediumCard({ companiesMedium }) {
           </form>
         </div>
         <div className="arrow">
-          <div onClick={handleLeftArrowKey} className="leftArrowKey">
+          <div
+            onClick={handleLeftArrowKey}
+            className={invalidArrowLeft ? "invalidLeftArrow" : "leftArrowKey"}
+          >
             ←
           </div>
           <button onClick={shuffleIndex}>Shuffle</button>
-          <div onClick={handleRightArrowKey} className="rightArrowKey">
+          <div
+            onClick={handleRightArrowKey}
+            className={
+              invalidArrowRight ? "invalidRightArrow" : "rightArrowKey"
+            }
+          >
             →
           </div>
         </div>

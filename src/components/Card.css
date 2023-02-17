@@ -27,6 +27,34 @@
   align-items: center;
 }
 
+.invalidLeftArrow{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 1.5em;
+  width: 1.5em;
+  font-size: 2em;
+  background-color: rgba(75, 75, 75, 0.632);
+  border-radius: 45px;
+  margin-right: 10px;
+  opacity: 0.3;
+}
+
+
+.invalidRightArrow{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 1.5em;
+  width: 1.5em;
+  font-size: 2em;
+  background-color: rgba(75, 75, 75, 0.632);
+  border-radius: 45px;
+  margin-left: 10px;
+  opacity: 0.3;
+}
+
+
 .leftArrowKey {
   display: flex;
   align-items: center;
@@ -61,7 +89,7 @@
   opacity: 0.8;
 }
 
-button{
+button {
   width: 125px;
 }
 
