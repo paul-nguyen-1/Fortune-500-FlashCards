@@ -1,10 +1,10 @@
-# Web Development Project 3 - _Name of App Here_
+# Web Development Project 3 - Guess the Company!
 
-Submitted by: **Your Name Here**
+Submitted by: Paul Nguyen
 
-This web app: **insert description**
+This web app: Work's as a flashcard to quiz individual's on Fortune 500 companies.
 
-Time spent: **X** hours spent in total
+Time spent: 10 hours spent in total
 
 ## Required Features
 
@@ -30,9 +30,8 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+![](webdemo.gif)
 
-<!-- Replace this with whatever GIF tool you used! -->
 
 GIF created with [Kap](https://getkap.co/) for macOS
 
