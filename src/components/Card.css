@@ -14,9 +14,9 @@
   height: 300px;
   width: 800px;
   border: 2px solid grey;
-  background-color: white;
+  background-color: #5A5A5A;
   border-radius: 20px;
-  color: black;
+  color: white;
   margin: 10px 25px;
   cursor: pointer;
 }

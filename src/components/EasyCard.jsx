@@ -35,9 +35,9 @@ function EasyCard({ companiesEasy }) {
     setIncorrectAnswer(true);
     setInvalidArrowLeft(true);
     setInvalidArrowRight(false);
-    console.log(index);
+    // console.log(index);
     //Check if order of array if shuffling -- currently works and shuffles array with correct index
-    console.log(companiesEasy);
+    // console.log(companiesEasy);
   };
 
   //Activates slider to go up to the next index and flip face card to front
@@ -107,7 +107,13 @@ function EasyCard({ companiesEasy }) {
           {active && correctAnswer ? (
             <h1>Correct!</h1>
           ) : (
-            active && initializeStart && <h2>This is a breeze.</h2>
+            active &&
+            initializeStart && (
+              <div>
+                <h2>This is a breeze. </h2>
+                <h3> Click here to get started</h3>
+              </div>
+            )
           )}
           {!active && (
             <ReactCardFlip isFlipped={flipCard} flipDirection="vertical">

@@ -35,9 +35,9 @@ function HardCard({ companiesHard }) {
     setIncorrectAnswer(true);
     setInvalidArrowLeft(true);
     setInvalidArrowRight(false);
-    console.log(index);
+    // console.log(index);
     //Check if order of array if shuffling -- currently works and shuffles array with correct index
-    console.log(companiesHard);
+    // console.log(companiesHard);
   };
 
   //Activates slider to go up to the next index and flip face card to front
@@ -107,7 +107,13 @@ function HardCard({ companiesHard }) {
           {active && correctAnswer ? (
             <h1>Correct!</h1>
           ) : (
-            active && initializeStart && <h2>Challenge Accepted!</h2>
+            active &&
+            initializeStart && (
+              <div>
+                <h2>Challenge Accepted! </h2>
+                <h3> Click here to get started</h3>
+              </div>
+            )
           )}
           {!active && (
             <ReactCardFlip isFlipped={flipCard} flipDirection="vertical">

@@ -226,9 +226,9 @@ function App() {
         {hardDifficulty && companiesHard.length}{" "}
       </span>
       <div className="difficultyContainer">
-        <button onClick={handleEasyDifficulty}>Easy</button>
-        <button onClick={handleMediumDifficulty}>Medium</button>
-        <button onClick={handleHardDifficulty}>Hard</button>
+        <button onClick={handleEasyDifficulty} style={{ border: easyDifficulty ? '2px solid #646cff' : ''}}>Easy</button>
+        <button onClick={handleMediumDifficulty} style={{ border: midDifficulty ? '2px solid #646cff' : ''}}>Medium</button>
+        <button onClick={handleHardDifficulty} style={{ border: hardDifficulty ? '2px solid #646cff' : ''}}>Hard</button>
       </div>
       {easyDifficulty && <EasyCard companiesEasy={companiesEasy} />}
       {midDifficulty && <MediumCard companiesMedium={companiesMedium} />}
