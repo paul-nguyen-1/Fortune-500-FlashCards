@@ -2,11 +2,19 @@ import React, { useState } from "react";
 import ReactCardFlip from "react-card-flip";
 import "./Card.css";
 
-function EasyCard({ companiesEasy }) {
+function CompanyCard({
+  companiesEasy,
+  companiesMedium,
+  companiesHard,
+  easyDifficulty,
+  mediumDifficulty,
+  hardDifficulty,
+  flipCard,
+  setFlipCard,
+}) {
   const [initializeStart, setInitializeStart] = useState(true);
   const [answer, setAnswer] = useState("");
   const [active, setActive] = useState(true);
-  const [flipCard, setFlipCard] = useState(false);
   const [index, setIndex] = useState(0);
   //need correct answer for correct answer card and incorrect for submit css
   const [correctAnswer, setCorrectAnswer] = useState(false);
@@ -28,6 +36,8 @@ function EasyCard({ companiesEasy }) {
   //shuffle entire arr of obj companiesEasy
   const shuffleIndex = () => {
     companiesEasy.sort(() => Math.random() - 0.5);
+    companiesMedium.sort(() => Math.random() - 0.5);
+    companiesHard.sort(() => Math.random() - 0.5);
     active ? setFlipCard(true) : setFlipCard(true);
     !active && setIndex(0);
     setCorrectAnswer(true);
@@ -44,6 +54,8 @@ function EasyCard({ companiesEasy }) {
   //restart if it goes past the last index
   const handleRightArrowKey = () => {
     index > 8 ? setIndex(companiesEasy.length - 1) : setIndex(index + 1);
+    index > 8 ? setIndex(companiesMedium.length - 1) : setIndex(index + 1);
+    index > 8 ? setIndex(companiesHard.length - 1) : setIndex(index + 1);
     index > 7 ? setInvalidArrowRight(true) : setInvalidArrowLeft(false);
     active ? setFlipCard(true) : setFlipCard(true);
     setCorrectAnswer(true);
@@ -76,7 +88,9 @@ function EasyCard({ companiesEasy }) {
       setFlipCard(true);
       setActive(false);
     } else if (
-      answer.toLowerCase() === companiesEasy[index].answer.toLowerCase()
+      answer.toLowerCase() === companiesEasy[index].answer.toLowerCase() ||
+      answer.toLowerCase() === companiesMedium[index].answer.toLowerCase() ||
+      answer.toLowerCase() === companiesHard[index].answer.toLowerCase()
     ) {
       setCorrectAnswer(true);
       setActive(true);
@@ -100,8 +114,20 @@ function EasyCard({ companiesEasy }) {
           className="cardContainer"
           onClick={handleSetActive}
           style={{
-            border: "5px solid #39FF14",
-            boxShadow: "green 2px 2px 2px",
+            border: easyDifficulty
+              ? "5px solid #39FF14"
+              : "" || mediumDifficulty
+              ? "5px solid yellow"
+              : "" || hardDifficulty
+              ? "5px solid red"
+              : "",
+            boxShadow: easyDifficulty
+              ? "green 2px 2px 2px"
+              : "" || mediumDifficulty
+              ? "yellow 2px 2px 2px"
+              : "" || hardDifficulty
+              ? "red 2px 2px 2px"
+              : "",
           }}
         >
           {active && correctAnswer ? (
@@ -110,7 +136,7 @@ function EasyCard({ companiesEasy }) {
             active &&
             initializeStart && (
               <div>
-                <h2>This is a breeze. </h2>
+                <h2>Test your knowledge! </h2>
                 <h3> Click here to get started</h3>
               </div>
             )
@@ -119,13 +145,17 @@ function EasyCard({ companiesEasy }) {
             <ReactCardFlip isFlipped={flipCard} flipDirection="vertical">
               <div>
                 <h1 style={{ display: flipCard && "none" }}>
-                  {companiesEasy[index].answer}
+                  {easyDifficulty && companiesEasy[index].answer}
+                  {mediumDifficulty && companiesMedium[index].answer}
+                  {hardDifficulty && companiesHard[index].answer}
                 </h1>
               </div>
 
               <div>
                 <h2 style={{ display: !flipCard && "none" }}>
-                  {companiesEasy[index].question}
+                  {easyDifficulty && companiesEasy[index].question}
+                  {mediumDifficulty && companiesMedium[index].question}
+                  {hardDifficulty && companiesHard[index].question}
                 </h2>
               </div>
             </ReactCardFlip>
@@ -167,4 +197,4 @@ function EasyCard({ companiesEasy }) {
   );
 }
 
-export default EasyCard;
+export default CompanyCard;
