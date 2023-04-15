@@ -11,6 +11,8 @@ The following functionality is completed:
 - [x] **A shuffle button is used to randomize the order of the cards**
 
 
+![](webdemo.gif)
+
 GIF created with [Kap](https://getkap.co/) for macOS
 
 ## License
